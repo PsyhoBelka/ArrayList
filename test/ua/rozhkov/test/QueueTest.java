@@ -22,13 +22,13 @@ public class QueueTest {
 	@Test
 	public void testInQueue() {
 		queue.inQueue(4);
-		assertEquals(4, queue.getLastValue());
+		assertEquals(4, queue.getLast());
 	}
 	
 	@Test
 	public void testDeQueue() throws Exception {
 		queue.deQueue();
-		assertEquals(3.14, queue.getFirstValue());
+		assertEquals(3.14, queue.getFirst());
 	}
 	
 	@Test

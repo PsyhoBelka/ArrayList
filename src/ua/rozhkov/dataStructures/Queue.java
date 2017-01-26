@@ -5,20 +5,12 @@ public class Queue {
 	private Node first;
 	private Node last;
 	
-	public Node getFirst() {
-		return first;
+	public Object getLast() {
+		return last.member;
 	}
 	
-	public Node getLast() {
-		return last;
-	}
-	
-	public Object getLastValue() {
-		return last.value;
-	}
-	
-	public Object getFirstValue() {
-		return first.value;
+	public Object getFirst() {
+		return first.member;
 	}
 	
 	public Queue() {
@@ -29,7 +21,6 @@ public class Queue {
 	public void inQueue(Object object) {
 		if (isEmty()) {
 			first = new Node(object);
-			//first.value=object;
 			last = first;
 		}
 		else {
@@ -57,10 +48,10 @@ public class Queue {
 
 class Node {
 	
-	Object value;
+	Object member;
 	Node next;
 	
-	Node(Object value) {
-		this.value = value;
+	Node(Object member) {
+		this.member = member;
 	}
 }
