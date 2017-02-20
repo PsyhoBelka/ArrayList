@@ -1,4 +1,4 @@
-package ua.rozhkov.dataStructures;
+package ua.rozhkov.datastructures.queue;
 
 public class Queue {
 	
@@ -6,11 +6,11 @@ public class Queue {
 	private Node last;
 	
 	public Object getLast() {
-		return last.member;
+		return last.value;
 	}
 	
 	public Object getFirst() {
-		return first.member;
+		return first.value;
 	}
 	
 	public Queue() {
@@ -44,14 +44,16 @@ public class Queue {
 	public boolean isEmty() {
 		return first == null;
 	}
-}
-
-class Node {
 	
-	Object member;
-	Node next;
-	
-	Node(Object member) {
-		this.member = member;
+	class Node {
+		
+		Object value;
+		Node next;
+		
+		Node(Object value) {
+			this.value = value;
+		}
 	}
 }
+
+
