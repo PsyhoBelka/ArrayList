@@ -1,8 +1,8 @@
-package ua.rozhkov.test;
+package ua.rozhkov.datastructures.queue;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.rozhkov.dataStructures.Queue;
+import ua.rozhkov.datastructures.queue.Queue;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

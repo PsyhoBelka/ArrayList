@@ -1,8 +1,8 @@
-package ua.rozhkov.test;
+package ua.rozhkov.datastructures.list;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.rozhkov.dataStructures.ArrayList;
+import ua.rozhkov.datastructures.list.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,7 +26,7 @@ public class ArrayListTest {
 	public void testAdd() {
 		int tmp = arrayList.size();
 		arrayList.add(10);
-		assertEquals(tmp + 1, arrayList.size());
+		assertEquals(11, arrayList.size());
 	}
 	
 	@Test
