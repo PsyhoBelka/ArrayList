@@ -2,7 +2,6 @@ package ua.rozhkov.datastructures.list;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.rozhkov.datastructures.list.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

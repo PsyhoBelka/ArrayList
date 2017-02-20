@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ArrayList <T> implements List <T> {
 	
 	private T[] array;
-	private int initialCapacity = 5;
+	private final int INITIAL_CAPACITY = 5;
 	private int size;
 	
 	int size() {
@@ -13,34 +13,11 @@ public class ArrayList <T> implements List <T> {
 	}
 	
 	ArrayList() {
-		array = (T[]) new Object[initialCapacity];
+		array = (T[]) new Object[INITIAL_CAPACITY];
 	}
 	
 	public ArrayList(int initialSize) {
-		initialCapacity = initialSize;
-		array = (T[]) new Object[initialCapacity];
-	}
-	
-	private int fullness() {
-		return (array.length - size);
-	}
-	
-	private boolean validateIndex(int index) {
-		return (!((index < 0) || (index > size)));
-	}
-	
-	private boolean validateIndexAdd(int index) {
-		return (!((index < 0) || (index > size)));
-	}
-	
-	private void increaseCapacity() {
-		array = Arrays.copyOf(array, array.length * 2);
-	}
-	
-	private void decreaseCapacity() {
-		if (array.length / size == 2) {
-			Arrays.copyOf(array, size);
-		}
+		array = (T[]) new Object[INITIAL_CAPACITY];
 	}
 	
 	public void add(T object) {
@@ -48,37 +25,16 @@ public class ArrayList <T> implements List <T> {
 	}
 	
 	public void add(T object, int index) {
-		if (validateIndexAdd(index)) {
-			if (size==array.length){
+		if (validateIndex(index)) {
+			if (size == array.length) {
 				increaseCapacity();
 			}
 			array[index] = object;
 			size++;
 		}
 		else {
-			throw new IndexOutOfBoundsException("Illegal index argument. Index must be between 0 and " + array.length + ".");
+			throw new IndexOutOfBoundsException("Illegal index - " + index + " - argument. Index must be between 0 and " + array.length + ".");
 		}
-		/*
-		if ((validateIndex(index))||(index==size)) {
-			switch (fullness()) {
-				case 0: {
-					increaseCapacity();
-				}
-				case 1: {
-					System.arraycopy(array, index, array, index + 1, size - index - 1);
-					array[index] = object;
-					size++;
-					break;
-				}
-				case -1: {
-					throw new UnknownError("Something gone bad!");
-				}
-			}
-		}
-		else {
-			throw new IndexOutOfBoundsException("Illegal index argument. Index must be between 0 and " + array.length + ".");
-		}
-		*/
 	}
 	
 	public T get(int index) {
@@ -86,7 +42,7 @@ public class ArrayList <T> implements List <T> {
 			return array[index];
 		}
 		else {
-			throw new IndexOutOfBoundsException("Illegal index argument. Index must be between 0 and " + array.length + ".");
+			throw new IndexOutOfBoundsException("Illegal index - " + index + " - argument. Index must be between 0 and " + array.length + ".");
 		}
 	}
 	
@@ -100,7 +56,7 @@ public class ArrayList <T> implements List <T> {
 			return tmpObject;
 		}
 		else {
-			throw new IndexOutOfBoundsException("Illegal index argument. Index must be between 0 and " + array.length + ".");
+			throw new IndexOutOfBoundsException("Illegal index - " + index + " - argument. Index must be between 0 and " + array.length + ".");
 		}
 	}
 	
@@ -111,6 +67,9 @@ public class ArrayList <T> implements List <T> {
 	public void set(T object, int index) {
 		if (validateIndex(index)) {
 			array[index] = object;
+		}
+		else {
+			throw new IndexOutOfBoundsException("Illegal index - " + index + " - argument. Index must be between 0 and " + array.length + ".");
 		}
 	}
 	
@@ -144,6 +103,20 @@ public class ArrayList <T> implements List <T> {
 		size = 0;
 		for (int i = 0; i < array.length; i++) {
 			array[i] = null;
+		}
+	}
+	
+	private boolean validateIndex(int index) {
+		return (!((index < 0) || (index > size)));
+	}
+	
+	private void increaseCapacity() {
+		array = Arrays.copyOf(array, array.length * 2);
+	}
+	
+	private void decreaseCapacity() {
+		if (array.length / size == 2) {
+			Arrays.copyOf(array, size);
 		}
 	}
 	
