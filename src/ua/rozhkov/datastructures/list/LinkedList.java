@@ -6,6 +6,10 @@ public class LinkedList <T> implements List <T> {
 	private Node first, last;
 	private int size;
 	
+	public int length() {
+		return size;
+	}
+	
 	public void add(T object) {
 		Node tmpNode = new Node(object);
 		if (isEmpty()) {
@@ -24,10 +28,15 @@ public class LinkedList <T> implements List <T> {
 		Node newNode = new Node(object);
 		Node tmpNode;
 		if (validateIndex(index)) {
-			tmpNode = findByIndex(index);
-			newNode.prev = tmpNode;
-			newNode.next = tmpNode.next;
-			tmpNode.next = newNode;
+			if (index != 0) {
+				tmpNode = findByIndex(index - 1);
+				newNode.prev = tmpNode;
+				newNode.next = tmpNode.next;
+				tmpNode.next = newNode;
+			}
+			else {
+				add(object);
+			}
 			size++;
 		}
 		else {
@@ -47,9 +56,14 @@ public class LinkedList <T> implements List <T> {
 	public T remove(int index) {
 		Node tmpNode;
 		if (validateIndex(index)) {
-			tmpNode = findByIndex(index);
-			tmpNode.prev.next = tmpNode.next;
-			tmpNode.next.prev = tmpNode.prev;
+			if (index != 0) {
+				tmpNode = findByIndex(index);
+				tmpNode.prev.next = tmpNode.next;
+				tmpNode.next.prev = tmpNode.prev;
+			}
+			else {
+				tmpNode = first;
+			}
 			size--;
 			return tmpNode.value;
 		}
@@ -59,9 +73,14 @@ public class LinkedList <T> implements List <T> {
 	}
 	
 	public void remove(T object) {
-		Node tmpNode = findByObject(object);
-		tmpNode.prev.next = tmpNode.next;
-		tmpNode.next.prev = tmpNode.prev;
+		if (length() > 1) {
+			Node tmpNode = findByObject(object);
+			tmpNode.prev.next = tmpNode.next;
+			tmpNode.next.prev = tmpNode.prev;
+		}
+		else {
+			clear();
+		}
 		size--;
 	}
 	
@@ -97,7 +116,7 @@ public class LinkedList <T> implements List <T> {
 	public int lastIndexOf(T object) {
 		Node tmpNode = last;
 		int i;
-		for (i = size; i > 0; i--) {
+		for (i = size-1; i >= 0; i--) {
 			if (tmpNode.value.equals(object)) {
 				break;
 			}
@@ -118,16 +137,17 @@ public class LinkedList <T> implements List <T> {
 	}
 	
 	public boolean contains(T object) {
-		return indexOf(object)!=0;
+		return indexOf(object) >= 0;
 	}
 	
 	public void clear() {
 		first = null;
 		last = null;
+		size=0;
 	}
 	
 	private boolean validateIndex(int index) {
-		return ((index > 0) || (index < size));
+		return ((index >= 0) || (index < size));
 	}
 	
 	private Node findByIndex(int index) {
