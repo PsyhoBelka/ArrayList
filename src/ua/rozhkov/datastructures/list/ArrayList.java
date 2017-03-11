@@ -2,18 +2,19 @@ package ua.rozhkov.datastructures.list;
 
 import java.util.Arrays;
 
+@SuppressWarnings("unchecked")
 public class ArrayList <T> implements List <T> {
 	
 	private T[] array;
 	private final int INITIAL_CAPACITY = 5;
 	private int size;
 	
-	int size() {
-		return size;
-	}
-	
 	ArrayList() {
 		array = (T[]) new Object[INITIAL_CAPACITY];
+	}
+	
+	public int length() {
+		return size;
 	}
 	
 	public ArrayList(int initialSize) {
@@ -74,7 +75,7 @@ public class ArrayList <T> implements List <T> {
 	}
 	
 	public int indexOf(T object) {
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i < length()-1; i++) {
 			if (array[i].equals(object)) {
 				return i;
 			}

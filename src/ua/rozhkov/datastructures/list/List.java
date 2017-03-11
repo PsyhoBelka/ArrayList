@@ -24,4 +24,6 @@ interface List <T> {
 	
 	void clear();
 	
+	int length();
+	
 }
